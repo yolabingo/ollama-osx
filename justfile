@@ -14,6 +14,10 @@ install-ollama:
 
 ollama-run-server:
     @brew services start ollama
+    @echo "Waiting for ollama server to start..."
+    @sleep 5
+    @while ! ollama list >/dev/null 2>&1; do echo "Waiting for ollama server..."; sleep 2; done
+    @echo "Ollama server is ready!"
 
 ollama-pull-models:
     @for model in {{CODE_MODELS}}; do echo "Pulling $model..."; ollama pull $model; done
