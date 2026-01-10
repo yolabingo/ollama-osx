@@ -1,7 +1,12 @@
 # Define models to pull
-MODELS := "codegemma:7b qwen3-coder:30b gpt-oss:latest deepseek-coder:6.7b codellama:13b starcoder2:7b"
+CODE_MODELS := "codellama:13b"
+IAC_MODELS := "qwen3-coder:30b deepseek-coder:6.7b"
 
-install: install-uv install-ollama ollama-run-server ollama-pull-models
+install: 
+    install-uv 
+    install-ollama 
+    ollama-run-server 
+    ollama-pull-models
 
 install-uv:
     @echo "Checking for uv..."
@@ -12,7 +17,8 @@ install-ollama:
     @if ! command -v ollama >/dev/null 2>&1; then echo "Installing ollama..."; brew install ollama; fi
 
 ollama-run-server:
-    @brew services start ollama
+    @brew services start --keep ollama
 
 ollama-pull-models:
-    @for model in {{MODELS}}; do echo "Pulling $model..."; ollama pull $model; done
+    @for model in {{CODE_MODELS}}; do echo "Pulling $model..."; ollama pull $model; done
+    @for model in {{IAC_MODELS}}; do echo "Pulling $model..."; ollama pull $model; done
