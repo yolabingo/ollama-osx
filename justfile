@@ -1,4 +1,4 @@
-install: install-uv install-ollama
+install: install-uv install-ollama ollama-run-server ollama-pull-models
 
 install-uv:
     @echo "Checking for uv..."
@@ -11,3 +11,10 @@ install-ollama:
 ollama-run-server:
     @brew services start ollama
 
+ollama-pull-models:
+    @ollama pull codegemma:7b 
+    @ollama pull qwen3-coder:30b 
+    @ollama pull gpt-oss:latest 
+    @ollama pull deepseek-coder:6.7b 
+    @ollama pull codellama:13b 
+    @ollama pull starcoder2:7b
