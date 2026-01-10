@@ -13,7 +13,7 @@ install-ollama:
     @if ! command -v ollama >/dev/null 2>&1; then echo "Installing ollama..."; brew install ollama; fi
 
 ollama-run-server:
-    @brew services start --keep ollama
+    @brew services start ollama
 
 ollama-pull-models:
     @for model in {{CODE_MODELS}}; do echo "Pulling $model..."; ollama pull $model; done
