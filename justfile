@@ -2,11 +2,7 @@
 CODE_MODELS := "codellama:13b"
 IAC_MODELS := "qwen3-coder:30b deepseek-coder:6.7b"
 
-install: 
-    install-uv 
-    install-ollama 
-    ollama-run-server 
-    ollama-pull-models
+install: install-uv install-ollama ollama-run-server ollama-pull-models
 
 install-uv:
     @echo "Checking for uv..."
