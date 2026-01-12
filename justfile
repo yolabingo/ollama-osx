@@ -2,6 +2,8 @@
 CODE_MODELS := "codellama:13b"
 IAC_MODELS := "qwen3-coder:30b deepseek-coder:6.7b"
 
+default: install model-configs
+
 install: install-uv \
          install-ollama \
          ollama-run-server \
@@ -18,10 +20,16 @@ install-ollama:
 ollama-run-server:
     @brew services start ollama
     @echo "Waiting for ollama server to start..."
-    @sleep 5
+    @sleep 4
     @while ! ollama list >/dev/null 2>&1; do echo "Waiting for ollama server..."; sleep 2; done
     @echo "Ollama server is ready!"
 
 ollama-pull-models:
     @for model in {{CODE_MODELS}}; do echo "Pulling $model..."; ollama pull $model; done
     @for model in {{IAC_MODELS}}; do echo "Pulling $model..."; ollama pull $model; done
+
+model-configs:
+    @mkdir -p pwd / "modelfiles"
+    @for model in {{IAC_MODELS}}; do \
+        @./Modelfile-tmpl.sh $model iac > modelfiles/Modelfile-${model}-iac
+    done
