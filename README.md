@@ -20,4 +20,7 @@ brew install just
 git clone https://github.com/yolabingo/ollama-osx.git
 cd ollama-osx
 just
+# add OLLAMA_API_BASE=http://127.0.0.1:11434 to your shell env vars for aider
 ```
+
+https://aider.chat/docs/llms/ollama.html
