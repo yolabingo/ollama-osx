@@ -2,12 +2,16 @@
 DJANGO_MODELS := "codellama:13b"
 IAC_MODELS := "qwen3-coder:30b deepseek-coder:6.7b"
 
-default: install model-configs
+default: install ollama-models
 
 install: install-uv \
          install-ollama \
-         ollama-run-server \
-         ollama-pull-models
+         install-aider \
+         ollama-run-server
+         
+
+ollama-models: ollama-pull-models \
+               model-configs
 
 install-uv:
     @echo "Checking for uv..."
@@ -16,6 +20,10 @@ install-uv:
 install-ollama:
     @echo "Checking for ollama..."
     @if ! command -v ollama >/dev/null 2>&1; then echo "Installing ollama..."; brew install ollama; fi
+
+install-aider:
+    @echo "Checking for aider..."
+    @if ! command -v aider >/dev/null 2>&1; then echo "Installing aider..."; uv tool install aider; fi
 
 ollama-run-server:
     @brew services start ollama
@@ -40,3 +48,17 @@ model-configs:
         echo "# ➡ create model:"; \
         echo "  ollama create -f $mf django-$model"; \
     done
+    @echo
+    @for model in {{IAC_MODELS}}; do \
+        echo "# ➡ run aider with model:"; \
+        echo "   ollama run iac-$model"; \
+        echo "   aider --model ollama_chat/iac-$model [FILES...]"; \
+        echo "   ollama stop iac-$model"; \
+    done
+    @for model in {{DJANGO_MODELS}}; do \
+        echo "# ➡ run aider with model:"; \
+        echo "   ollama run django-$model"; \
+        echo "   aider --model ollama_chat/django-$model [FILES...]"; \
+        echo "   ollama stop django-$model"; \
+    done
+
