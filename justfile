@@ -1,5 +1,5 @@
 # Define models to pull
-CODE_MODELS := "codellama:13b"
+DJANGO_MODELS := "codellama:13b"
 IAC_MODELS := "qwen3-coder:30b deepseek-coder:6.7b"
 
 default: install model-configs
@@ -25,11 +25,18 @@ ollama-run-server:
     @echo "Ollama server is ready!"
 
 ollama-pull-models:
-    @for model in {{CODE_MODELS}}; do echo "Pulling $model..."; ollama pull $model; done
+    @for model in {{DJANGO_MODELS}}; do echo "Pulling $model..."; ollama pull $model; done
     @for model in {{IAC_MODELS}}; do echo "Pulling $model..."; ollama pull $model; done
 
 model-configs:
     @mkdir -p modelfiles
     @for model in {{IAC_MODELS}}; do \
-        ./Modelfile-tmpl.sh $model iac > modelfiles/Modelfile-$model-iac; \
+        mf="modelfiles/Modelfile-$model-iac" \
+        ./Modelfile-tmpl.sh $model iac > $mf; \
+        echo "ollama create $mf"; \
+    done
+    @for model in {{DJANGO_MODELS}}; do \
+        mf=modelfiles/Modelfile-$model-django
+        ./Modelfile-tmpl.sh $model iac > $mf; \
+        echo "ollama create $mf"; \
     done
