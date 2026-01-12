@@ -31,5 +31,5 @@ ollama-pull-models:
 model-configs:
     @mkdir -p modelfiles
     @for model in {{IAC_MODELS}}; do \
-        ./Modelfile-tmpl.sh $$model iac > modelfiles/Modelfile-$$model-iac; \
+        ./Modelfile-tmpl.sh $model iac > modelfiles/Modelfile-$model-iac; \
     done
