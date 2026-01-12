@@ -19,8 +19,6 @@ install-ollama:
 
 ollama-run-server:
     @brew services start ollama
-    @echo "Waiting for ollama server to start..."
-    @sleep 4
     @while ! ollama list >/dev/null 2>&1; do echo "Waiting for ollama server..."; sleep 2; done
     @echo "Ollama server is ready!"
 
@@ -33,10 +31,12 @@ model-configs:
     @for model in {{IAC_MODELS}}; do \
         mf="$(pwd)/modelfiles/Modelfile-$model-iac"; \
         ./Modelfile-tmpl.sh $model iac > $mf; \
-        echo "ollama create $mf"; \
+        echo "# ➡ create model:"; \
+        echo "  ollama create -f $mf iac-$model"; \
     done
     @for model in {{DJANGO_MODELS}}; do \
         mf="$(pwd)/modelfiles/Modelfile-$model-django"; \
         ./Modelfile-tmpl.sh $model django > $mf; \
-        echo "ollama create $mf"; \
+        echo "# ➡ create model:"; \
+        echo "  ollama create -f $mf django-$model"; \
     done
