@@ -50,15 +50,13 @@ model-configs:
     done
     @echo
     @for model in {{IAC_MODELS}}; do \
-        echo "# ➡ run aider with model:"; \
+        echo "# ➡ run model:"; \
         echo "   ollama run iac-$model"; \
         echo "   aider --model ollama_chat/iac-$model [FILES...]"; \
-        echo "   ollama stop iac-$model"; \
     done
     @for model in {{DJANGO_MODELS}}; do \
-        echo "# ➡ run aider with model:"; \
+        echo "# ➡ run model:"; \
         echo "   ollama run django-$model"; \
         echo "   aider --model ollama_chat/django-$model [FILES...]"; \
-        echo "   ollama stop django-$model"; \
     done
 
