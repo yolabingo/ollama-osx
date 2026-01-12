@@ -29,7 +29,7 @@ ollama-pull-models:
     @for model in {{IAC_MODELS}}; do echo "Pulling $model..."; ollama pull $model; done
 
 model-configs:
-    @mkdir -p pwd / "modelfiles"
+    @mkdir -p modelfiles
     @for model in {{IAC_MODELS}}; do \
-        @./Modelfile-tmpl.sh $model iac > modelfiles/Modelfile-${model}-iac
+        ./Modelfile-tmpl.sh $$model iac > modelfiles/Modelfile-$$model-iac; \
     done
