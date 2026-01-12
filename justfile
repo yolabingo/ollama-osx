@@ -31,12 +31,12 @@ ollama-pull-models:
 model-configs:
     @mkdir -p modelfiles
     @for model in {{IAC_MODELS}}; do \
-        mf="modelfiles/Modelfile-$model-iac" \
+        mf="$(pwd)/modelfiles/Modelfile-$model-iac"; \
         ./Modelfile-tmpl.sh $model iac > $mf; \
         echo "ollama create $mf"; \
     done
     @for model in {{DJANGO_MODELS}}; do \
-        mf=modelfiles/Modelfile-$model-django
-        ./Modelfile-tmpl.sh $model iac > $mf; \
+        mf="$(pwd)/modelfiles/Modelfile-$model-django"; \
+        ./Modelfile-tmpl.sh $model django > $mf; \
         echo "ollama create $mf"; \
     done
