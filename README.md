@@ -4,8 +4,8 @@ A setup script for macOS to install and configure Ollama with AI models for deve
 
 This repository provides a `justfile` that automates the installation and setup of:
 - uv package manager
-- Ollama server
-- Aider AI coding assistant
+- [Ollama server](https://docs.ollama.com/)
+- [Aider AI coding assistant](https://aider.chat/)
 - Pre-trained language models for Django and Infrastructure as Code (IaC) tasks
 
 The setup process includes:
@@ -22,8 +22,9 @@ brew install just
 git clone https://github.com/yolabingo/ollama-osx.git
 cd ollama-osx
 just
-# add OLLAMA_API_BASE=http://127.0.0.1:11434 to your shell env vars for aider
 ```
+add **`OLLAMA_API_BASE=http://127.0.0.1:11434`** to your shell env vars for aider
+
 https://aider.chat/docs/llms/ollama.html
 
 
