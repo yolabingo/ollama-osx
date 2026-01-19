@@ -29,6 +29,8 @@ https://aider.chat/docs/llms/ollama.html
 
 
 ### Sample output - create and run models
+
+Tune SYSTEM prompts and settings in [Modelfile-tmpl.sh](Modelfile-tmpl.sh) as needed. 
 ```
 # ➡ create model:
   ollama create -f /Users/toddj/github/ollama-osx/modelfiles/Modelfile-qwen3-coder:30b-iac iac-qwen3-coder:30b
@@ -37,13 +39,13 @@ https://aider.chat/docs/llms/ollama.html
 # ➡ create model:
   ollama create -f /Users/toddj/github/ollama-osx/modelfiles/Modelfile-codellama:13b-django django-codellama:13b
 
-# ➡ run model:
+# ➡ run model with ollama or aider:
    ollama run iac-qwen3-coder:30b
    aider --model ollama_chat/iac-qwen3-coder:30b [FILES...]
-# ➡ run model:
+# ➡ run model with ollama or aider:
    ollama run iac-deepseek-coder:6.7b
    aider --model ollama_chat/iac-deepseek-coder:6.7b [FILES...]
-# ➡ run model:
+# ➡ run model with ollama or aider:
    ollama run django-codellama:13b
    aider --model ollama_chat/django-codellama:13b [FILES...]
 ```
