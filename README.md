@@ -1,5 +1,18 @@
 # ollama-osx
 
+<details>
+<summary>Table of Contents</summary>
+
+- [Overview](#ollama-osx)
+- [Setup with just](#setup-with-just)
+- [Connecting terminal AI coding assistants](#connecting-terminal-ai-coding-assistants)
+  - [Aider](#aider)
+  - [Claude Code (via LiteLLM proxy)](#claude-code-via-litellm-proxy)
+  - [Codex CLI](#codex-cli)
+- [Sample output - create and run models](#sample-output---create-and-run-models)
+
+</details>
+
 A setup script for macOS to install and configure Ollama with AI models for development tasks.
 
 This repository provides a `justfile` that automates the installation and setup of:
@@ -23,9 +36,55 @@ git clone https://github.com/yolabingo/ollama-osx.git
 cd ollama-osx
 just
 ```
-add **`OLLAMA_API_BASE=http://127.0.0.1:11434`** to your shell env vars for aider
 
-https://aider.chat/docs/llms/ollama.html
+
+## Connecting terminal AI coding assistants
+
+### Aider
+
+Aider has native Ollama support via the `ollama_chat/` model prefix.
+
+Set env var and run Aider with a model:
+```bash
+export OLLAMA_API_BASE=http://127.0.0.1:11434
+aider --model ollama_chat/iac-qwen3-coder:30b [FILES...]
+```
+
+See https://aider.chat/docs/llms/ollama.html for full documentation.
+
+
+### Claude Code (via LiteLLM proxy)
+
+Claude Code speaks the Anthropic API protocol. LiteLLM bridges it to Ollama.
+
+Install LiteLLM:
+```bash
+uv tool install 'litellm[proxy]'
+```
+
+Start the proxy (in a separate terminal):
+```bash
+litellm --model ollama/iac-qwen3-coder:30b --port 4000
+```
+
+Set env vars and run Claude Code:
+```bash
+export ANTHROPIC_BASE_URL=http://localhost:4000
+export ANTHROPIC_API_KEY=fake-key
+claude
+```
+
+
+### Codex CLI
+
+Codex CLI supports OpenAI-compatible endpoints — Ollama provides one out of the box.
+
+Set env vars and run Codex with a model:
+```bash
+export OPENAI_BASE_URL=http://localhost:11434/v1
+export OPENAI_API_KEY=ollama
+codex --model iac-qwen3-coder:30b
+```
 
 
 ### Sample output - create and run models
