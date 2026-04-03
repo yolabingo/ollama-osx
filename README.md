@@ -92,11 +92,11 @@ codex --model iac-qwen3-coder:30b
 Tune SYSTEM prompts and settings in [Modelfile-tmpl.sh](Modelfile-tmpl.sh) as needed. 
 ```
 # ➡ create model:
-  ollama create -f /Users/toddj/github/ollama-osx/modelfiles/Modelfile-qwen3-coder:30b-iac iac-qwen3-coder:30b
+  ollama create -f ~/github/ollama-osx/modelfiles/Modelfile-qwen3-coder:30b-iac iac-qwen3-coder:30b
 # ➡ create model:
-  ollama create -f /Users/toddj/github/ollama-osx/modelfiles/Modelfile-deepseek-coder:6.7b-iac iac-deepseek-coder:6.7b
+  ollama create -f ~/github/ollama-osx/modelfiles/Modelfile-deepseek-coder:6.7b-iac iac-deepseek-coder:6.7b
 # ➡ create model:
-  ollama create -f /Users/toddj/github/ollama-osx/modelfiles/Modelfile-codellama:13b-django django-codellama:13b
+  ollama create -f ~/github/ollama-osx/modelfiles/Modelfile-codellama:13b-django django-codellama:13b
 
 # ➡ run model with ollama or aider:
    ollama run iac-qwen3-coder:30b
